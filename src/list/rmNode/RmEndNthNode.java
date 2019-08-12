@@ -58,22 +58,22 @@ public class RmEndNthNode {
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         if (head == null) {
-            return null;
+            return head;
         }
         ListNode front = head;
         ListNode back = head;
 
         for (int i = 0; i < n; i++) {
             front = front.next;
-        }
-        if (front == null) {
-            return null;
+            if (front == null) {
+                return head.next;
+            }
         }
         while (front.next != null) {
             front = front.next;
             back = back.next;
         }
-        back.next = front;
+        back.next = back.next.next;
         return head;
     }
 }
