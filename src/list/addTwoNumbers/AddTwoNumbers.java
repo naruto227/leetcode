@@ -28,6 +28,11 @@ public class AddTwoNumbers {
             line = in.readLine();
             ListNode l2 = RmEndNthNode.stringToListNode(line);
 
+            ListNode ret = new Solution().addTwoNumbers(l1, l2);
+
+            String out = RmEndNthNode.listNodeToString(ret);
+
+            System.out.print(out);
         }
     }
 }
@@ -41,12 +46,40 @@ class Solution {
         int cnt = 0;
         while (p != null || q != null) {
             if (p != null && q != null) {
-                int sum = p.val + q.val;
+                int sum = p.val + q.val + cnt;
                 cnt = sum / 10;
-                if(cnt > 0) {
-                    
+                if (cnt > 0) {
+                    sum %= 10;
+                }
+                head.next = new ListNode(sum);
+                head = head.next;
+                p = p.next;
+                q = q.next;
+            } else {
+                if (p != null) {
+                    int sum = p.val + cnt;
+                    cnt = sum / 10;
+                    if (cnt > 0) {
+                        sum %= 10;
+                    }
+                    head.next = new ListNode(sum);
+                    head = head.next;
+                    p = p.next;
+                } else {
+                    int sum = q.val + cnt;
+                    cnt = sum / 10;
+                    if (cnt > 0) {
+                        sum %= 10;
+                    }
+                    head.next = new ListNode(sum);
+                    head = head.next;
+                    q = q.next;
                 }
             }
+        }
+        if (cnt > 0) {
+            head.next = new ListNode(cnt);
+            head = head.next;
         }
 
         return dumpRoot.next;
