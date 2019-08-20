@@ -32,13 +32,43 @@ public class AddTwoNumbers {
 
             String out = RmEndNthNode.listNodeToString(ret);
 
-            System.out.print(out);
+            System.out.println(out);
         }
     }
 }
 
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode p = l1;
+        ListNode q = l2;
+        ListNode dumpRoot = new ListNode(0);
+        ListNode head = dumpRoot;
+        int cnt = 0;
+        while (p != null || q != null) {
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;
+            int sum = x + y + cnt;
+            cnt = sum / 10;
+            if (cnt > 0) {
+                sum %= 10;
+            }
+            head.next = new ListNode(sum);
+            head = head.next;
+            if (p != null) {
+                p = p.next;
+            }
+            if (q != null) {
+                q = q.next;
+            }
+        }
+        if (cnt > 0) {
+            head.next = new ListNode(cnt);
+        }
+
+        return dumpRoot.next;
+    }
+
+    public ListNode addTwoNumbersTwo(ListNode l1, ListNode l2) {
         ListNode p = l1;
         ListNode q = l2;
         ListNode dumpRoot = new ListNode(0);
