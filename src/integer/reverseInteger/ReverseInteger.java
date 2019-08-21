@@ -12,7 +12,8 @@ import java.io.InputStreamReader;
  */
 public class ReverseInteger {
     public static void main(String[] args) throws IOException {
-        System.out.println(Integer.MAX_VALUE + "\n" + Integer.MIN_VALUE);
+        System.out.println(Integer.MAX_VALUE + "\n" + Integer.MIN_VALUE); // 2147483647  -2147483648
+        System.out.println(-2 / 10); // 0
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
         while ((line = in.readLine()) != null) {
