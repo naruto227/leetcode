@@ -1,9 +1,9 @@
+// source: https://leetcode-cn.com/problems/palindrome-number/
 package integer.palindromeNumber;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 /**
  * 回文数
  * Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
