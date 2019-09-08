@@ -1,3 +1,4 @@
+@[toc]
 ## lambda表达式简介
 　　lambda有两个关键结构，第一个是lambda表达式自身，第二个是函数式接口。  
 　　lambda表达式本质上就是一个匿名方法，用于实现由函数式接口定义的另一个方法。lambda表达式会导致产生
@@ -35,7 +36,7 @@
 片段转换为对象的方法。
 > 注意：为了在目标类型上下文中使用lambda表达式，抽象方法的类型和lambda的类型必须兼容。
 
-###代码示例
+### 代码示例
 ```java
     interface NumberTest {
         boolean test(int first, int second);
@@ -55,7 +56,7 @@
     (int n, int d) -> (n % d) == 0; // 合法
     (int n, int d) -> (n % d) == 0; // 非法
 ```
-##块lambda表达式
+## 块lambda表达式
 　　箭头运算符->右侧的代码可以由一个代码块构成，可以包含多条语句，这种类型的lambda体称为块体(block body)，块lambda。
 在块lambda中必须显式使用一条return语句来返回值。  
 ```
@@ -65,7 +66,7 @@
         return result;
     }
 ```
-##泛型函数式接口
+## 泛型函数式接口
 　　lambda表达式自身不能指定类型形参，lambda表达式不能是泛型（由于存在类型推断，所有lambda表达式都展现出一些类似于泛型的特征）。
 然而，与lambda表达式关联的函数式接口可以是泛型的。
 ```java
@@ -73,3 +74,106 @@
         boolean test(T param1, T param2);
     }
 ```
+　　作为实参传递lambda表达式
+```java
+    interface StringTest {
+        String test(String param);
+    }
+    
+    class Demo {
+        static String changeStr(StringTest st, String s) {
+            return st.test(s);
+        }
+    
+        public static void main(String[] args) {
+            String inStr = "lambda in java";
+            String outStr;
+            StringTest reverse = (param) -> {
+                StringBuilder sb = new StringBuilder();
+                for(int i = param.length() - 1; i >= 0; i--) {
+                    sb.append(param.charAt(i));
+                }
+                
+                return sb.toString();
+            };
+            
+            outStr = changeStr(reverse, inStr);
+            outStr = changeStr((str) -> str.replace(' ', '-'), inStr);
+        }
+    }
+```
+## lambda表达式和变量捕获
+　　lambda表达式可以获取或设置其外层**类的实例或静态变量的值**，以及调用其外层类定义的方法。
+但是，当lambda表达式使用其外层作用域内定义的局部变量时，会产生一种特殊的情况，称为变量捕获，
+只能**使用实质上为final的局部变量**。lambda表达式不能修改外层作用域内的局部变量。
+```java
+    interface MyTest {
+        int test(int param);
+    }
+    
+    class Demo {
+        public static void main(String[] args){
+            int num = 1;
+            MyTest mt = (param) -> {
+                int res = param + num;
+                // illegal, can't modify the value of num;
+                // num++;
+                return res;
+            };
+            System.out.println(mt.test(10)); // 11
+            // error, it would remove the effectively final status from num;
+            // num = 0;
+        }
+    }
+```
+> lambda表达式可以使用和修改其调用类的实例变量，只是不能使用其外层作用域中的局部变量，
+除非该变量实质上是final。
+## 方法引用
+### 静态方法的方法引用
+　　类名后跟上方法名：ClassName::methodName。类名与方法名之间使用双冒号分隔开。
+```java
+    interface IntPredicate {
+        boolean test(int num);
+    }
+    
+    class MyIntPredicates {
+        static boolean isEven(int num) {
+            return num % 2 == 0;
+        }
+    }
+    
+    class Demo {
+        static boolean numTest(IntPredicate p, int v) {
+            return p.test(v);
+        }
+        
+        public static void main(String[] args){
+            boolean res = numTest(MyIntPredicates::isEven, 16);
+            // ……
+        }   
+    }
+```
+### 实例方法的方法引用
+　　objRef::methodName，由方法引用所引用的方法进行的操作针对的是objRef。指定对泛型方法的方法引用：
+```java
+    interface SomeTest<T> {
+        boolean test(T param1, T param2);
+    }
+    
+    class MyClass {
+        static <T> boolean myGenMeth(T x, T y) {
+            boolean result = false;
+            // ……
+            return result;
+        }
+        SomeTest<Integer> ref = MyClass::<Integer>myGenMeth;
+    }
+```
+## 构造方法引用
+　　ClassName::new
+## 预定义的函数式接口
+　　包名：java.util.function，接口：UnaryOperator<T>、BinaryOperator<T>、Consumer<T>、
+Supplier<T>、Function<T, R>、Predicate<T>
+流包：java.util.stream，流是数据的管道，流表示序列对象。允许创建管线（pipeline）来执行一系列针对
+数据的动作，这些动作经常由lambda表达式来表示。这部分内容后面再介绍。
+
