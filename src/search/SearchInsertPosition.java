@@ -1,6 +1,6 @@
 package search;
 
-import sum.twoSum.TwoSum;
+import util.ArrayUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class SearchInsertPosition {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
         while ((line = in.readLine()) != null) {
-            int[] nums = TwoSum.stringToIntegerArray(line);
+            int[] nums = ArrayUtil.stringToIntegerArray(line);
             line = in.readLine();
             int target = Integer.parseInt(line);
 

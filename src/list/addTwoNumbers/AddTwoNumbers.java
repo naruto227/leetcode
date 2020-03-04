@@ -2,12 +2,11 @@
 package list.addTwoNumbers;
 
 import list.ListNode;
-import list.rmNode.RmEndNthNode;
+import util.ListNodeUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 /**
  * You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
@@ -25,13 +24,13 @@ public class AddTwoNumbers {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String line;
         while ((line = in.readLine()) != null) {
-            ListNode l1 = RmEndNthNode.stringToListNode(line);
+            ListNode l1 = ListNodeUtil.stringToListNode(line);
             line = in.readLine();
-            ListNode l2 = RmEndNthNode.stringToListNode(line);
+            ListNode l2 = ListNodeUtil.stringToListNode(line);
 
             ListNode ret = new Solution().addTwoNumbers(l1, l2);
 
-            String out = RmEndNthNode.listNodeToString(ret);
+            String out = ListNodeUtil.listNodeToString(ret);
 
             System.out.println(out);
         }
