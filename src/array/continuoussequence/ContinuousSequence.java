@@ -3,9 +3,7 @@ package array.continuoussequence;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
+import java.util.*;
 
 /**
  * 试题57 - II. 和为s的连续正数序列
@@ -22,7 +20,7 @@ public class ContinuousSequence {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String line;
         while ((line = br.readLine()) != null) {
-            int[][] res = new Solution().findContinuousSequence(Integer.valueOf(line));
+            int[][] res = new Solution().findContinuousSequence1(Integer.valueOf(line));
             String deepToString = Arrays.deepToString(res);
             System.out.println(deepToString);
         }
@@ -60,6 +58,33 @@ public class ContinuousSequence {
             }
 
             return res;
+        }
+
+        public int[][] findContinuousSequence1(int target) {
+            List<int[]> list = new ArrayList<>();
+            int sum = 1;
+            int left = 1;
+            int right = 2;
+            while (left < (target + 1) >> 1) {
+                if (sum < target) {
+                    sum += right;
+                    right++;
+                }else if (sum > target) {
+                    sum -= left;
+                    left++;
+                }else {
+                    int[] arr = new int[right - left];
+                    for (int i = 0; i < arr.length; i++) {
+                        arr[i] = i + left;
+                    }
+                    list.add(arr);
+                    sum -= (2 * left + 1);
+                    left += 2;
+//                    sum -= left;
+//                    left++;
+                }
+            }
+            return list.toArray(new int[list.size()][]);
         }
     }
 
