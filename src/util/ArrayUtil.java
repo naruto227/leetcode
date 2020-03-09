@@ -4,7 +4,11 @@ package util;
  * Created by Michael Allan on 2020/1/27.
  */
 public class ArrayUtil {
-
+    /**
+     *
+     * @param input [7,1,5,3,6,4]
+     * @return
+     */
     public static int[] stringToIntegerArray(String input) {
         input = input.trim();
         input = input.substring(1, input.length() - 1);
