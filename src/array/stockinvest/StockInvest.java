@@ -62,7 +62,7 @@ public class StockInvest {
          */
         public static int maxProfit2(int[] prices) {
 
-            return 0；
+            return 0;
         }
     }
 }
