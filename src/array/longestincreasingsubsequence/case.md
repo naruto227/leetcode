@@ -10,3 +10,6 @@ Output: 0
   
 Input: [10,9,2,5,3,4]
 Output: 3 
+
+Input: [1,3,4,2,6]  
+Output: 4 
