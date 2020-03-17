@@ -21,7 +21,7 @@ public class FormCharacters {
     public static void main(String[] args) {
         String[] words = {"hello","world","leetcode"};
         String chars = "welldonehoneyr";
-        int countCharacters = new Solution().countCharacters(words, chars);
+        int countCharacters = new Solution().countCharacters1(words, chars);
         System.out.println(countCharacters);
     }
 
@@ -57,6 +57,38 @@ public class FormCharacters {
                 }
             }
             return sum;
+        }
+
+        public int countCharacters1(String[] words, String chars) {
+            int sum = 0;
+            int[] chars_count = count(chars);
+            for (String word : words) {
+                int[] word_count = count(word);
+                if (contains(chars_count, word_count)) {
+                    sum += word.length();
+                }
+            }
+            return sum;
+        }
+
+        private boolean contains(int[] chars_count, int[] word_count) {
+            boolean res = true;
+            for (int i = 0; i < 26; i++) {
+                if(chars_count[i] < word_count[i]) {
+                    res = false;
+                    break;
+                }
+            }
+            return res;
+        }
+
+        private int[] count(String word) {
+            int[] counter = new int[26];
+            char[] charArray = word.toCharArray();
+            for (char c : charArray) {
+                counter[c - 'a']++;
+            }
+            return counter;
         }
     }
 }
