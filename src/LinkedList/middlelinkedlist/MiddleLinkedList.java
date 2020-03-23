@@ -20,13 +20,7 @@ public class MiddleLinkedList {
         public ListNode middleNode(ListNode head) {
             ListNode slow = head;
             ListNode fast = head;
-            while (true) {
-                if (fast.next == null)
-                    break;
-                if (fast.next.next == null) {
-                    slow = slow.next;
-                    break;
-                }
+            while (fast != null && fast.next != null) {
                 slow = slow.next;
                 fast = fast.next.next;
             }
