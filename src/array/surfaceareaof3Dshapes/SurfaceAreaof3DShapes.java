@@ -15,7 +15,7 @@ public class SurfaceAreaof3DShapes {
     public static void main(String[] args) {
        int[][] grid = {{1,1,1},{1,0,1},{1,1,1}};
 //        int[][] grid = {{1,0},{0,2}};
-        int surfaceArea = new Solution().surfaceArea(grid);
+        int surfaceArea = new Solution().surfaceArea1(grid);
         System.out.println(surfaceArea);
     }
 
@@ -39,6 +39,22 @@ public class SurfaceAreaof3DShapes {
                 }
             }
             return total - overlap * 2;
+        }
+
+        public int surfaceArea1(int[][] grid) {
+            int total = 0;
+            int n = grid.length;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    int val = grid[i][j];
+                    if (val > 0) {
+                        total += (val << 2) + 2;
+                        total -= j < (n - 1) ? Math.min(val, grid[i][j + 1]) << 1 : 0;
+                        total -= i < (n - 1) ? Math.min(val, grid[i + 1][j]) << 1 : 0;
+                    }
+                }
+            }
+            return total;
         }
     }
 }
