@@ -1,0 +1,21 @@
+public int minimumLengthEncoding(String[] words) {
+        int num = words.length;
+        String[] reverseWords = new String[num];
+        for (int i = 0; i < num; i++) {
+            String rWord = new StringBuilder(words[i]).reverse().toString();
+            reverseWords[i] = rWord;
+        }
+
+        Arrays.sort(reverseWords);
+
+        int res = 0;
+        for (int i = 0; i < num; i++) {
+            if (i + 1 < num && reverseWords[i + 1].startsWith(reverseWords[i])) {
+                continue;
+            } else {
+                res += reverseWords[i].length() + 1;
+            }
+        }
+
+        return res;
+    }
