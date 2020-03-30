@@ -22,7 +22,12 @@ public class LastNumOfTheCircle {
     }
     static class Solution {
         public int lastRemaining(int n, int m) {
-            return findLastNum(n, m);
+//            return findLastNum(n, m);
+            int res = 0;
+            for (int i = 2; i != n + 1; ++i)
+                res = (m + res) % i;
+            return res;
+
         }
 
         private int findLastNum(int n, int m) {
