@@ -1,6 +1,7 @@
 package array.sortarray;
 
 /**
+ * 912. 排序数组
  * Created by Michael Allan on 2020/3/31.
  */
 public class SortArray {
@@ -14,6 +15,12 @@ public class SortArray {
             return nums;
         }
 
+        /**
+         * 快速排序
+         * @param nums
+         * @param low
+         * @param high
+         */
         private void quickSort(int[] nums, int low, int high) {
             if (low <= high) {
                 int pos = findPos(nums, low, high);
