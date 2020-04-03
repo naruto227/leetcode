@@ -22,9 +22,16 @@ public class StringToInteger {
     static class Solution {
         public int myAtoi(String str) {
             char[] chars = str.toCharArray();
+            int L = str.length();
             int idx = 0;
-            while (chars[idx] == ' ') {
+            // 字符串为空的场景
+            while (idx < L && chars[idx] == ' ') {
                 idx++;
+            }
+            // 字符串为空及全为空格情形
+            if (idx == L) {
+                //去掉前导空格以后到了末尾了
+                return 0;
             }
             boolean negative = false;
             if (chars[idx] == '-') {
@@ -35,7 +42,7 @@ public class StringToInteger {
             }
             int res = 0;
             // 判断是否为数字可以调用API：Character.isDigit
-            while (idx < chars.length && isDigit(chars[idx])) {
+            while (idx < L && isDigit(chars[idx])) {
                 int digit = chars[idx] - '0';
                 if (res > (Integer.MAX_VALUE - digit) / 10) {
                     return negative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
