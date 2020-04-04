@@ -11,6 +11,9 @@ public class ArrayUtil {
      */
     public static int[] stringToIntegerArray(String input) {
         input = input.trim();
+        if (input.isEmpty()) {
+            return new int[]{};
+        }
         input = input.substring(1, input.length() - 1);
         if(input.length() == 0) {
             return new int[0];
