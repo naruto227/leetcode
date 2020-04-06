@@ -16,7 +16,7 @@ public class TrappingRainWater {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String line;
         while ((line = br.readLine()) != null) {
-            int trap = new Solution().trap(ArrayUtil.stringToIntegerArray(line));
+            int trap = new Solution().trap1(ArrayUtil.stringToIntegerArray(line));
             System.out.println(trap);
         }
     }
@@ -58,6 +58,27 @@ public class TrappingRainWater {
                 // 从下一个位置开始找区间
                 start = end;
             }
+            return res;
+        }
+
+        public int trap1(int[] height) {
+            int left = 0;
+            int right = height.length - 1;
+            int left_max = 0;
+            int right_max = 0;
+            int res = 0;
+            while (left < right) {
+                left_max = Math.max(left_max, height[left]);
+                right_max = Math.max(right_max, height[right]);
+                if (left_max < right_max) {
+                    res += left_max - height[left];
+                    left++;
+                }else {
+                    res += right_max - height[right];
+                    right--;
+                }
+            }
+
             return res;
         }
     }
