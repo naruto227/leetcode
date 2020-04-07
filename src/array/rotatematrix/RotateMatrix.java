@@ -54,5 +54,8 @@ public class RotateMatrix {
 
             }
         }
+
+        // 方法三：由公式：旋转90度结果为：matrix[i][j] --> matrix[j][N - 1 - i]。
+        // 等效于：matrix[i][j] -水平轴翻转-> matrix[N - 1 - i][j] -对角线翻转-> matrix[j][N - 1 - i]
     }
 }
