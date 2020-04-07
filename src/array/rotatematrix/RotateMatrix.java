@@ -34,31 +34,24 @@ public class RotateMatrix {
                 }
             }
         }
-        // 该方法有问题
+
+        /**
+         * 每四项会进入一次循环；枚举矩阵左上角高为 \lfloor n/2 \rfloor⌊n/2⌋，宽为 \lfloor (n+1)/2 \rfloor⌊(n+1)/2⌋ 的子矩阵，保证不重复
+         * @param matrix
+         */
         public void rotate1(int[][] matrix) {
             int N = matrix.length;
-            if(N == 0) {
-                return;
-            }
-            /**存储前一个状态的值*/
-            int i = 0;
-            int j = 0;
-            int prev = matrix[0][0];
-            /**存储被替换状态的值，作为下一次更新的值使用*/
-            int row;
-            int col;
-            int cur;
-            int total = N*N;
-            while (total-- != 0) {
-                row = j;
-                col = N - 1 - i;
+            int row = N >> 1;
+            int col = (N + 1) >> 1;
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[N - 1 - j][i];
+                    matrix[N - 1 - j][i] = matrix[N - 1 - i][N - 1 - j];
+                    matrix[N - 1 - i][N - 1 - j] = matrix[j][N - 1 - i];
+                    matrix[j][N - 1 - i] = temp;
+                }
 
-                cur = matrix[row][col];
-                matrix[row][col] = prev;
-
-                i = row;
-                j = col;
-                prev = cur;
             }
         }
     }
