@@ -7,13 +7,14 @@ import java.util.LinkedList;
 /**
  * 面试题13. 机器人的运动范围
  * 链接：https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/
+ * 注：此问题使用DFS的解法比BFS快
  * Created by Michael Allan on 2020/4/8.
  */
 public class RangeMotionOfRobot {
     public static void main(String[] args) {
 //        int movingCount = new Solution().movingCount(2, 3, 1);
 //        int movingCount = new Solution().movingCount(3, 1, 0);
-        int movingCount = new Solution().movingCount(100, 100, 20);
+        int movingCount = new Solution().movingCount2(100, 100, 20);
         System.out.println(movingCount);
     }
 
@@ -90,5 +91,32 @@ public class RangeMotionOfRobot {
             return res;
         }
 
+        /**
+         * DFS。通过递归，先朝一个方向搜到底，再回溯至上个节点，沿另一个方向搜索，以此类推。
+         剪枝： 在搜索中，遇到数位和超出目标值、此元素已访问，则应立即返回，称之为 可行性剪枝 。
+         * @param m
+         * @param n
+         * @param k
+         * @return
+         */
+        int m, n, k;
+        boolean[][] visited;
+        public int movingCount2(int m, int n, int k) {
+            this.m = m;
+            this.n = n;
+            this.k = k;
+            this.visited = new boolean[m][n];
+            return dfs(0, 0, 0, 0);
+        }
+
+        private int dfs(int row, int col, int sx, int sy) {
+            if (row >= m || col >= n || sx + sy > k || visited[row][col]) {
+                return 0;
+            }
+            visited[row][col] = true;
+            int nsx = (row + 1) % 10 == 0 ? sx - 8 : sx + 1; // row + 1，向下移动，产生新的数位和
+            int nsy = (col + 1) % 10 == 0 ? sy - 8 : sy + 1; // col + 1，向右移动，产生新的数位和
+            return 1 + dfs(row + 1, col, nsx, sy) + dfs(row, col + 1, sx, nsy);
+        }
     }
 }
