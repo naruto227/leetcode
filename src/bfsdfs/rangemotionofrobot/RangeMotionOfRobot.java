@@ -7,7 +7,7 @@ import java.util.LinkedList;
 /**
  * 面试题13. 机器人的运动范围
  * 链接：https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/
- * 注：此问题使用DFS的解法比BFS快
+ * 注：此问题使用DFS的解法比BFS快。DFS递归还可以用全局变量保存结果，dfs方法返回为void
  * Created by Michael Allan on 2020/4/8.
  */
 public class RangeMotionOfRobot {
