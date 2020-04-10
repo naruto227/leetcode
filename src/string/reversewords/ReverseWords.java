@@ -13,6 +13,7 @@ public class ReverseWords {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String line;
+        Solution solution = new Solution();
         while ((line = br.readLine()) != null) {
 
         }
@@ -35,5 +36,24 @@ public class ReverseWords {
 
             return sb.substring(0, sb.lastIndexOf(" ")).toString();
         }
+
+        public String reverseWords1(String s) {
+            // 除去开头和末尾的空白字符
+            s = s.trim();
+            // 正则匹配连续的空白字符作为分隔符分割
+            String[] split = s.split("\\s+");
+            StringBuilder sb = new StringBuilder();
+            for (int i = split.length - 1; i > -1; i--) {
+                sb.append(split[i]).append(" ");
+            }
+
+            return sb.substring(0, sb.lastIndexOf(" ")).toString();
+//            List<String> wordList = Arrays.asList(split);
+//            Collections.reverse(wordList);
+//
+//            return String.join(" ", wordList);
+
+        }
+
     }
 }
