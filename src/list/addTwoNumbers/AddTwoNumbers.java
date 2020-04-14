@@ -30,9 +30,7 @@ public class AddTwoNumbers {
 
             ListNode ret = new Solution().addTwoNumbers(l1, l2);
 
-            String out = ListNodeUtil.listNodeToString(ret);
-
-            System.out.println(out);
+            System.out.println(ret);
         }
     }
 }
