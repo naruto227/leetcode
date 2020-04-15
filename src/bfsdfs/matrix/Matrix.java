@@ -10,7 +10,7 @@ import java.util.Queue;
  */
 public class Matrix {
     /**
-     * 使用多源BFS解法
+     * 使用多源BFS解法。首先把每个源点 00 入队，然后从各个 00 同时开始一圈一圈的向 11 扩散（每个 11 都是被离它最近的 00 扩散到的 ）
      * @param matrix
      * @return
      */
