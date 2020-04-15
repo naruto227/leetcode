@@ -27,6 +27,7 @@ public class Matrix {
                 }
             }
         }
+        // {-1, 0}表示向上移动；{1, 0}表示向下移动；{0, -1}表示向左移动；{0, 1}表示向右移动
         int[][] direction = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         while (!queue.isEmpty()) {
             int[] point = queue.poll();
