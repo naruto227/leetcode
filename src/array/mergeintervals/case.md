@@ -10,4 +10,6 @@ Example 2:
 
 Input: {{1,4},{4,5}}  
 Output: {{1,5}}  
-Explanation: Intervals {1,4} and {4,5} are considered overlapping.  
+Explanation: Intervals {1,4} and {4,5} are considered overlapping.
+  
+{{2,6},{8,10},{6,18}}

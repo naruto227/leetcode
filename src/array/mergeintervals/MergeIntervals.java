@@ -9,8 +9,10 @@ import java.util.*;
  */
 public class MergeIntervals {
     public static void main(String[] args) {
+
+        int[][] merge = new MergeIntervals().merge1(new int[][]{{2,6},{8,10},{6,18}});
 //        int[][] merge = new MergeIntervals().merge1(new int[][]{{1, 4}, {4, 5}});
-        int[][] merge = new MergeIntervals().merge(new int[][]{{1,3},{2,6},{8,10},{15,18}});
+//        int[][] merge = new MergeIntervals().merge1(new int[][]{{1,3},{2,6},{8,10},{15,18}});
         String deepToString = Arrays.deepToString(merge);
         System.out.println(deepToString);
     }
@@ -51,5 +53,23 @@ public class MergeIntervals {
      */
     private boolean hasIntersection(int[] area, int[] element) {
         return Math.max(area[0], element[0]) <= Math.min(area[1], element[1]);
+    }
+
+    public int[][] merge1(int[][] intervals) {
+        // 按区间起始位置进行排序，升序
+        Arrays.sort(intervals, (e1, e2) -> e1[0] - e2[0]);
+        int[][] res = new int[intervals.length][2];
+        int index = -1;
+        for (int[] area : intervals) {
+            // 没有相交的部分
+            if (index == -1 || res[index][1] < area[0]) {
+                res[++index] = area;
+            } else {
+                // 有相交的部分，取大者res[index][1] = max(area[1], res[index][1])
+                res[index][1] = Math.max(area[1], res[index][1]);
+            }
+        }
+        // res的初始化行的长度为intervals.length，合并后只有index + 1个
+        return Arrays.copyOf(res, index + 1);
     }
 }
