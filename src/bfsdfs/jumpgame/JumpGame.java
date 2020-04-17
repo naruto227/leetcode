@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 55. Jump Game
@@ -19,7 +20,7 @@ public class JumpGame {
         String line;
         while((line = br.readLine()) != null) {
             int[] nums = ArrayUtil.stringToIntegerArray(line);
-            boolean canJump = new Solution().canJump(nums);
+            boolean canJump = new Solution().canJump2(nums);
             System.out.println(canJump);
         }
     }
@@ -55,7 +56,7 @@ public class JumpGame {
         }
 
         /**
-         * 贪心算法，遍历，找到最远可到达的位置
+         * 贪心算法，遍历，找到当前最远可到达的位置
          * @param nums
          * @return
          */
@@ -69,6 +70,57 @@ public class JumpGame {
                         return true;
                     }
                     remote = Math.max(remote, i + nums[i]);
+                }
+            }
+            return false;
+        }
+
+        /**
+         * dp思想，dp[i]表示前i个元素所能到达的最远位置。
+         * 状态转移方程：
+         * 1、i可达，dp[i - 1] >= i, dp[i] = max(dp[i - 1], i + nums[i])；
+         * 2、dp[i - 1] < i, i不可达 --> 大于等于i后面的位置均不可达
+         * @param nums
+         * @return
+         */
+        public boolean canJump2(int[] nums) {
+            if (nums.length == 1) {
+                return true;
+            }
+            int length = nums.length;
+            int end = length - 1;
+            int[] dp = new int[length];
+            dp[0] = nums[0];
+            for (int i = 1; i < length; i++) {
+                if (dp[i - 1] >= end) {
+                    return true;
+                }
+                if (dp[i - 1] >= i) {
+                    dp[i] = Math.max(dp[i - 1], i + nums[i]);
+                }else {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public boolean canJump3(int[] nums) {
+            Queue<Integer> q = new LinkedList<>();
+            boolean[] visited = new boolean[nums.length];
+            q.offer(0);
+            while(!q.isEmpty()) {
+                for(int size=q.size();size>0;size--) {
+                    // idx is current position
+                    int idx = q.remove();
+                    // if this condition is true, we can find an answer
+                    if(idx >= nums.length - 1) return true;
+                    // i is the next rightmost position we can reach
+                    for(int i=idx + 1;i < nums.length &&
+                            i<=idx + nums[idx];i++) {
+                        if(visited[i]) continue;
+                        visited[i] = true;
+                        q.offer(i);
+                    }
                 }
             }
             return false;
