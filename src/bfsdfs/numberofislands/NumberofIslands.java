@@ -9,7 +9,7 @@ import java.util.LinkedList;
  */
 public class NumberofIslands {
     public static void main(String[] args) {
-        Solution solution = new NumberofIslands().new Solution();
+        SolutionDFS solution = new NumberofIslands().new SolutionDFS();
         char[][] grid1 = {
                 {'1', '1', '1', '1', '0'},
                 {'1', '1', '0', '1', '0'},
@@ -67,7 +67,7 @@ public class NumberofIslands {
                             for (int k = 0; k < 4; k++) {
                                 int newX = curX + direction[k][0];
                                 int newY = curY + direction[k][1];
-                                // 如果不越界、没有被访问过、并且还要是陆地，我就继续放入队列，放入队列的同时，要记得标记已经访问过
+                                // 如果不越界、没有被访问过、并且还要是陆地，就继续放入队列，放入队列的同时，要记得标记已经访问过
                                 if (inArea(newX, newY) && grid[newX][newY] == '1' && !visited[newX][newY]) {
                                     // 标记这个点访问过了
                                     visited[newX][newY] = true;
@@ -81,6 +81,55 @@ public class NumberofIslands {
             }
 
             return res;
+        }
+
+        private boolean inArea(int x, int y) {
+            return x >= 0 && x < row && y >= 0 && y < col;
+        }
+    }
+
+    class SolutionDFS {
+        private int row;
+        private int col;
+        int[][] direction = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        boolean[][] visited;
+        char[][] grid;
+
+        public int numIslands(char[][] grid) {
+            this.row = grid.length;
+            // 矩阵为空
+            if (row == 0) {
+                return 0;
+            }
+            this.col = grid[0].length;
+            this.grid = grid;
+            visited = new boolean[row][col];
+            int res = 0;
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    // 如果是岛屿中的一个点，并且没有被访问过
+                    // 就进行深度优先搜索
+                    if (!visited[i][j] && grid[i][j] == '1') {
+                        res++;
+                        dfs(i, j);
+                    }
+                }
+            }
+            return res;
+        }
+
+        /**
+         * 从坐标为 (x,y) 的点开始进行深度优先搜索。搜索出所有与点（x,y）连接在一起构成岛屿的点
+          */
+        private void dfs(int x, int y) {
+            visited[x][y] = true;
+            for (int i = 0; i < 4; i++) {
+                int newX = x + direction[i][0];
+                int newY = y + direction[i][1];
+                if (inArea(newX, newY) && grid[newX][newY] == '1' && !visited[newX][newY]) {
+                    dfs(newX, newY);
+                }
+            }
         }
 
         private boolean inArea(int x, int y) {
