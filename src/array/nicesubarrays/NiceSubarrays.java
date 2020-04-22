@@ -5,6 +5,8 @@ import util.ArrayUtil;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 1248. Count Number of Nice Subarrays
@@ -49,6 +51,34 @@ public class NiceSubarrays {
                 sum += (odd[i] - odd[i - 1]) * (odd[i + k] - odd[i + k - 1]);
             }
             return sum;
+        }
+
+        public int numberOfSubarrays1(int[] nums, int k) {
+
+            for (int i = 0; i < nums.length; i++) {
+                nums[i] = (nums[i] & 1) == 1 ? 1 : 0;
+            }
+
+            int res = 0;
+            // 定义sum为nums[0:i]数据范围的前缀和
+            int sum = 0;
+            // 存储sum出现的次数。key为前缀和sum，value为次数
+            Map<Integer, Integer> map = new HashMap<>();
+            map.put(0, 1);
+            // sum = nums[0:i]; 连续子数组出现k个奇数的次数 = 前缀和（sum - k）出现的次数
+            for (int i = 0; i < nums.length; i++) {
+                // 由于前面的预处理已经将nums的值变为了0、1，sum表示已经出现过多少个奇数！
+                sum += nums[i];
+                if (map.containsKey(sum - k)) {
+                    res += map.get(sum - k);
+                }
+                if (map.containsKey(sum)) {
+                    map.put(sum, map.get(sum) + 1);
+                } else {
+                    map.put(sum, 1);
+                }
+            }
+            return res;
         }
     }
 }
