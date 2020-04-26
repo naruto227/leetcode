@@ -1,6 +1,6 @@
 package LinkedList.deletenode;
 
-import LinkedList.ListNode;
+import list.ListNode;
 
 /**
  * 203. Remove Linked List Elements

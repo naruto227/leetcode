@@ -10,6 +10,11 @@ public class ListNodeUtil {
         // Generate array from the input
         int[] nodeValues = ArrayUtil.stringToIntegerArray(input);
         // Now convert that list into linked list
+        return arrayToListNode(nodeValues);
+    }
+
+    public static ListNode arrayToListNode(int[] nodeValues) {
+        // Now convert that list into linked list
         ListNode dummyRoot = new ListNode(0);
         ListNode ptr = dummyRoot;
         for (int item : nodeValues) {

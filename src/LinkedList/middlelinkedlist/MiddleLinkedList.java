@@ -1,6 +1,6 @@
 package LinkedList.middlelinkedlist;
 
-import LinkedList.ListNode;
+import list.ListNode;
 
 /**
  * 876. Middle of the Linked List
