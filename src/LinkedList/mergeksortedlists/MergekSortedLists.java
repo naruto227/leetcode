@@ -5,7 +5,8 @@ import util.ListNodeUtil;
 
 /**
  * 23. Merge k Sorted Lists
- * 链接：https://leetcode-cn.com/problems/merge-k-sorted-lists/
+ * 链接：https://leetcode-cn.com/problems/merge-k-sorted-lists/.
+ * 有机会就补充下优先级队列的写法，以及两两合并，不使用双指针在原链表数组上修改；使用分治写法（递归代码）的写法
  * Created by Michael Allan on 2020/4/26.
  */
 public class MergekSortedLists {
