@@ -3,7 +3,10 @@ package normal.happynum;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * Created by Michael Allan on 2020/4/30.
@@ -76,6 +79,15 @@ public class HappyNumber {
                 n /= 10;
             }
             return totalSum;
+        }
+        // 如果会进入循环，一定会生成这几个数字。所以用硬编码的方式
+        private Set<Integer> hashSet = new HashSet<>(Arrays.asList(4, 16, 37, 58, 89, 145, 42, 20));
+        //4	16	37	58	89	145	42	20
+        public boolean isHappy2(int n) {
+            while (n != 1 && !hashSet.contains(n)) {
+                n = getNext(n);
+            }
+            return n == 1;
         }
     }
 }
