@@ -17,4 +17,8 @@ public class TreeUtil {
         }
         return root;
     }
+
+    public static TreeNode createTree(int[] arr) {
+        return createTree(arr, 0);
+    }
 }

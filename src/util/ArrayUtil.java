@@ -23,7 +23,11 @@ public class ArrayUtil {
         int[] output = new int[parts.length];
         for (int index = 0; index < parts.length; index++) {
             String part = parts[index].trim();
-            output[index] = Integer.parseInt(part);
+            if (part == null) {
+                output[index] = Integer.parseInt(null);
+            }else {
+                output[index] = Integer.parseInt(part);
+            }
         }
 
         return output;
