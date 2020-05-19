@@ -5,8 +5,8 @@ package string.validpalindromeII;
  */
 public class ValidPalindromeII {
     public static void main(String[] args) {
-        String s = "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga";
-        boolean validPalindrome = new ValidPalindromeII().new Solution().validPalindrome(s);
+        String s = "baca";
+        boolean validPalindrome = new ValidPalindromeII().new Solution().validPalindrome1(s);
         System.out.println(validPalindrome);
     }
     class Solution {
@@ -67,6 +67,38 @@ public class ValidPalindromeII {
                     }
                 }
             }
+            return true;
+        }
+
+        public boolean validPalindrome1(String s) {
+            char[] chars = s.toCharArray();
+            int low = 0;
+            int high = chars.length - 1;
+            while (low < high) {
+                if (chars[low] == chars[high]) {
+                    low++;
+                    high--;
+                } else {
+                    boolean deleteHighOnce = true;
+                    for (int i = low, j = high - 1; i < j; i++, j--) {
+                        if (chars[i] != chars[j]) {
+                            deleteHighOnce = false;
+                            break;
+                        }
+                    }
+
+                    boolean deleteLowOnce = true;
+                    for (int i = low + 1, j = high; i < j; i++, j--) {
+                        if (chars[i] != chars[j]) {
+                            deleteLowOnce = false;
+                            break;
+                        }
+                    }
+
+                    return deleteHighOnce || deleteLowOnce;
+                }
+            }
+
             return true;
         }
     }
