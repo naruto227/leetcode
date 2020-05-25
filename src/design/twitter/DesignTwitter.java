@@ -1,8 +1,10 @@
-package api;
+package design.twitter;
 
 import java.util.*;
 
 /**
+ * 355. Design Twitter
+ * 链接：https://leetcode-cn.com/problems/design-twitter/
  * Created by Michael Allan on 2020/4/13.
  */
 public class DesignTwitter {
