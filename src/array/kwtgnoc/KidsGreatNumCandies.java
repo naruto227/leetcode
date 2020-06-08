@@ -32,7 +32,7 @@ public class KidsGreatNumCandies {
             }
 
             for (int candie : candies) {
-                res.add(candie + extraCandies >= max)
+                res.add(candie + extraCandies >= max);
             }
             return res;
         }

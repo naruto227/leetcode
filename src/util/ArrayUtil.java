@@ -33,6 +33,21 @@ public class ArrayUtil {
         return output;
     }
 
+    public static String[] stringToStrArray(String input) {
+        input = input.trim().replaceAll("\"", "");
+        if (input.isEmpty()) {
+            return new String[]{};
+        }
+        input = input.substring(1, input.length() - 1);
+        if(input.length() == 0) {
+            return new String[0];
+        }
+
+        String[] parts = input.split(",");
+
+        return parts;
+    }
+
     public static String integerArrayToString(int[] nums) {
         return integerArrayToString(nums, nums.length);
     }
