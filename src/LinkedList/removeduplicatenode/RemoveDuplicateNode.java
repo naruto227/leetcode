@@ -19,7 +19,7 @@ public class RemoveDuplicateNode {
         String line;
         while ((line = br.readLine()) != null) {
             ListNode head = ListNodeUtil.stringToListNode(line);
-            ListNode node = removeDN.removeDuplicateNodes(head);
+            ListNode node = removeDN.removeDuplicateNodes1(head);
             System.out.println(node);
         }
     }
@@ -38,5 +38,25 @@ public class RemoveDuplicateNode {
         }
         dummyHead.next = null;
         return newHead.next;
+    }
+
+    public ListNode removeDuplicateNodes1(ListNode head) {
+        if(head == null) {
+            return head;
+        }
+        Set<Integer> set = new HashSet<>();
+        set.add(head.val);
+        ListNode dummyHead = head;
+        while(dummyHead.next != null) {
+            // 当前待删除节点
+            ListNode cur = dummyHead.next;
+            if (set.add(cur.val)) {
+                dummyHead = dummyHead.next;
+            }else {
+                dummyHead.next = dummyHead.next.next;
+            }
+        }
+        dummyHead.next = null;
+        return head;
     }
 }
