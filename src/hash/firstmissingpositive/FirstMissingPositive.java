@@ -1,6 +1,8 @@
 package hash.firstmissingpositive;
 
 /**
+ * 41. First Missing Positive
+ * 同268
  * Created by Michael Allan on 2020/6/27.
  */
 public class FirstMissingPositive {
