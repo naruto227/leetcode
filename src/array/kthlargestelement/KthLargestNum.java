@@ -1,6 +1,7 @@
 package array.kthlargestelement;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 /**
@@ -66,5 +67,19 @@ public class KthLargestNum {
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
+    }
+
+    public int findKthLargest2(int[] nums, int k) {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        for (int num : nums) {
+            if (priorityQueue.isEmpty() || priorityQueue.size() < k || num > priorityQueue.peek()) {
+                priorityQueue.offer(num);
+            }
+            if (priorityQueue.size() > k) {
+                priorityQueue.poll();
+            }
+        }
+
+        return priorityQueue.peek();
     }
 }
