@@ -24,5 +24,22 @@ public class DivingBoard {
 
             return res;
         }
+
+        public int[] divingBoard1(int shorter, int longer, int k) {
+            if (k == 0) {
+                return new int[k];
+            }
+            if (shorter == longer) {
+                return new int[] {shorter * k};
+            }
+            int a1 = shorter * k;
+            int diff = longer - shorter;
+            int[] res = new int[k + 1];
+            for (int i = 0; i <= k; i++) {
+                res[i] = a1  + i * diff;
+            }
+
+            return res;
+        }
     }
 }
