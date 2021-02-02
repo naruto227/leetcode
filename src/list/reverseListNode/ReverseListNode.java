@@ -17,26 +17,42 @@ public class ReverseListNode {
     }
 
     private static class Solution {
+        // 双指针引用，3、4相当于走了两步
         public ListNode reverseList(ListNode head) {
             ListNode cur = head;
             ListNode prev = null;
             while (cur != null) {
-                ListNode tmp = cur.next;
-                cur.next = prev;
-                prev = cur;
-                cur = tmp;
+                ListNode tmp = cur.next; // 1
+                cur.next = prev; // 2
+                prev = cur;  // 3
+                cur = tmp;  // 4
             }
             return prev;
         }
-
+        // 递归写法
         public ListNode reverseList1(ListNode head) {
             if (head == null || head.next == null) {
                 return head;
             }
-            ListNode res = reverseList(head.next);
+            ListNode res = reverseList1(head.next);
             head.next.next = head;
             head.next = null;
             return res;
+        }
+        // 局部反转，最优
+        // 第3步相当于走一步操作，2、4可理解为仅修改引用
+        public ListNode reverseLise2(ListNode head) {
+            if (head == null) {
+                return head;
+            }
+            ListNode cur = head;
+            while (head.next != null) {
+                ListNode tmp = head.next.next; // 1
+                head.next.next = cur;  // 2
+                cur = head.next;  // 3
+                head.next = tmp;  // 4
+            }
+            return cur;
         }
     }
 }
