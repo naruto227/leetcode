@@ -28,5 +28,15 @@ public class ReverseListNode {
             }
             return prev;
         }
+
+        public ListNode reverseList1(ListNode head) {
+            if (head == null || head.next == null) {
+                return head;
+            }
+            ListNode res = reverseList(head.next);
+            head.next.next = head;
+            head.next = null;
+            return res;
+        }
     }
 }
